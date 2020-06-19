@@ -3,4 +3,8 @@ class Position {
     this.x = x;
     this.y = y;
   }
+
+  displayPosition() {
+    return `${this.x} ${this.y}`;
+  }
 }

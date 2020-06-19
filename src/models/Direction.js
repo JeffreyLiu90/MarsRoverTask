@@ -34,4 +34,13 @@ class Direction {
     const newValue = Direction.leftMapper[this.value];
     this.value = newValue;
   }
+
+  displayDirection() {
+    return `${this.value}`;
+  }
 }
+
+const dir1 = Direction.create("N");
+console.log("dir1: ", dir1);
+dir1.turnRight();
+console.log(dir1);
