@@ -1,11 +1,32 @@
 class Position {
-  constructor(x, y) {
+  constructor(x, y, grid) {
     this.x = x;
     this.y = y;
+    this.grid = grid;
+  }
+
+  static create(x, y, gridCoord) {
+    const gridX = gridCoord.x;
+    const gridY = gridCoord.y;
+    const grid = new Grid(gridX, gridY);
+    if (x > gridX || y > gridY) {
+      throw new Error(
+        "X and Y value of the rover position cannot be larger than the grid coordinates"
+      );
+    } else {
+      return new Position(x, y, grid);
+    }
   }
 
   displayPosition() {
     return `${this.x} ${this.y}`;
+  }
+}
+
+class Grid {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
 
@@ -57,8 +78,8 @@ class Rover {
     this.direction = direction;
   }
 
-  static create(x, y, dir) {
-    const position = new Position(x, y);
+  static create(x, y, dir, gridCoord) {
+    const position = Position.create(x, y, gridCoord);
     const direction = Direction.create(dir);
     return new Rover(position, direction);
   }
@@ -104,9 +125,19 @@ class Rover {
   }
 }
 
-const rover1 = Rover.create(1, 2, "N");
-console.log("rover1display: ", rover1.displayOutput());
-console.log("rover1: ", rover1);
-rover1.processInstructions("LMLMLMLMM");
-console.log("rover1: ", rover1);
-console.log("rover1FINALisplay: ", rover1.displayOutput());
+// const grid1 = new Grid(5, 5);
+const gridCoord = { x: 5, y: 5 };
+const rover1 = Rover.create(5, 2, "N", gridCoord);
+console.log("rover1 :", rover1);
+console.log("Position X :", rover1.position.x);
+console.log("Position Y :", rover1.position.y);
+console.log("Position of Grid X :", rover1.position.grid.x);
+console.log("Position of Grid Y :", rover1.position.grid.y);
+console.log("Direction :", rover1.direction.value);
+// console.log("Grid :", rover1)
+// console.log("rover1 :", rover1);
+// console.log("rover1display: ", rover1.displayOutput());
+// console.log("rover1: ", rover1);
+// rover1.processInstructions("LMLMLMLMM");
+// console.log("rover1: ", rover1);
+// console.log("rover1FINALisplay: ", rover1.displayOutput());
