@@ -40,7 +40,4 @@ class Direction {
   }
 }
 
-const dir1 = Direction.create("N");
-console.log("dir1: ", dir1);
-dir1.turnRight();
-console.log(dir1);
+module.exports = Direction;

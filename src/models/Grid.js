@@ -4,3 +4,5 @@ class Grid {
     this.y = y;
   }
 }
+
+module.exports = Grid;
