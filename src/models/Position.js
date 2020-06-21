@@ -29,4 +29,9 @@ class Position {
   }
 }
 
+const grid = {
+  x: 5,
+  y: 5
+};
+
 module.exports = Position;

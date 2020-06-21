@@ -6,11 +6,11 @@ const Direction = require("../models/Direction");
 
 describe("Direction", () => {
   describe("#value", () => {
-    it("should have a directional value", () => {
+    it("should display a directional value", () => {
       const value = "N";
       const direction = new Direction(value);
 
-      assert.equal(direction.value, value);
+      assert.equal(direction.displayDirection(), value);
     });
     it("should throw an error if wrong directional value is given", () => {
       const newDirection = () => {
@@ -19,23 +19,6 @@ describe("Direction", () => {
       };
 
       assert.throws(newDirection, "this is not a valid direction");
-      // Direction.create(direction).should.throw(
-      //   Error,
-      //   "This is not a valid direction"
-      // );
-
-      // (function() {
-      //   new Direction(direction);
-      // }.should.throw(Error, "This is not a valid direction"));
-
-      // dir.should.throw(Error("This is not a valid direction"));
-      // should.Throw(() => new Direction(direction), Error);
-
-      // expect(
-      //   Direction.create(direction).to.throw(
-      //     new Error("This is not a valid direction")
-      //   )
-      // );
     });
   });
   describe("#turn right", () => {
