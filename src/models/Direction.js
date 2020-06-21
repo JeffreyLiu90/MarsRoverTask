@@ -40,4 +40,9 @@ class Direction {
   }
 }
 
+const generateErrorFn = () => {
+  const errorDir = "Z";
+  return Direction.create(errorDir);
+};
+
 module.exports = Direction;

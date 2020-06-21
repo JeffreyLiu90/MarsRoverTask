@@ -1,5 +1,6 @@
 const assert = require("assert");
 const chai = require("chai");
+const expect = chai.expect;
 
 const Direction = require("../models/Direction");
 
@@ -12,13 +13,29 @@ describe("Direction", () => {
       assert.equal(direction.value, value);
     });
     it("should throw an error if wrong directional value is given", () => {
-      const direction = "S";
-
-      const newDirection = direction => {
-        return new Direction(direction);
+      const newDirection = () => {
+        const direction = "Z";
+        return Direction.create(direction);
       };
 
-      assert.throws(newDirection(direction), "This is not a valid direction");
+      assert.throws(newDirection, "this is not a valid direction");
+      // Direction.create(direction).should.throw(
+      //   Error,
+      //   "This is not a valid direction"
+      // );
+
+      // (function() {
+      //   new Direction(direction);
+      // }.should.throw(Error, "This is not a valid direction"));
+
+      // dir.should.throw(Error("This is not a valid direction"));
+      // should.Throw(() => new Direction(direction), Error);
+
+      // expect(
+      //   Direction.create(direction).to.throw(
+      //     new Error("This is not a valid direction")
+      //   )
+      // );
     });
   });
   describe("#turn right", () => {
