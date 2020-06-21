@@ -18,7 +18,7 @@ describe("Direction", () => {
         return Direction.create(direction);
       };
 
-      assert.throws(newDirection, "this is not a valid direction");
+      assert.throws(newDirection, /This is not a valid direction/);
     });
   });
   describe("#turn right", () => {
