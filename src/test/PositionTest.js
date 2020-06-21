@@ -62,5 +62,47 @@ describe("Position", () => {
         /X and Y value of the rover position cannot be larger than the grid coordinates/
       );
     });
+    it("throw an error if the position's Y coordinate is larger than Grid's Y coordinate", () => {
+      const errorSize = () => {
+        const x = 3;
+        const y = 6;
+        const grid = {
+          x: 5,
+          y: 5
+        };
+        return Position.create(x, y, grid);
+      };
+
+      assert.throws(
+        errorSize,
+        /X and Y value of the rover position cannot be larger than the grid coordinates/
+      );
+    });
+    it("throw an error if the grid's position X is smaller than 0", () => {
+      const errorSize = () => {
+        const x = 3;
+        const y = 6;
+        const grid = {
+          x: -5,
+          y: 5
+        };
+        return Position.create(x, y, grid);
+      };
+
+      assert.throws(errorSize, /Grid coordinates cannot be less than 0/);
+    });
+    it("throw an error if the grid's position Y is smaller than 0", () => {
+      const errorSize = () => {
+        const x = 3;
+        const y = 6;
+        const grid = {
+          x: 5,
+          y: -5
+        };
+        return Position.create(x, y, grid);
+      };
+
+      assert.throws(errorSize, /Grid coordinates cannot be less than 0/);
+    });
   });
 });

@@ -98,5 +98,67 @@ describe("Rover", () => {
         assert.equal(rover1.displayOutput(), value);
       });
     });
+    describe("#error", () => {
+      it("should throw an error if Position X coordinate is not a number", () => {
+        const errorValue = () => {
+          const x = "N";
+          const y = 2;
+          const direction = "N";
+          const grid = { x: 5, y: 5 };
+
+          return Rover.create(x, y, direction, grid);
+        };
+
+        assert.throws(
+          errorValue,
+          /Position X and Y coordinate values must be a number/
+        );
+      });
+      it("should throw an error if Position Y coordinate is not a number", () => {
+        const errorValue = () => {
+          const x = 1;
+          const y = "N";
+          const direction = "N";
+          const grid = { x: 5, y: 5 };
+
+          return Rover.create(x, y, direction, grid);
+        };
+
+        assert.throws(
+          errorValue,
+          /Position X and Y coordinate values must be a number/
+        );
+      });
+      it("should throw an error if Grid's position X coordinate is not a number", () => {
+        const errorValue = () => {
+          const x = 1;
+          const y = 3;
+          const direction = "N";
+          const grid = { x: "N", y: 5 };
+
+          return Rover.create(x, y, direction, grid);
+        };
+
+        assert.throws(
+          errorValue,
+          /Grid X and Y coordinate values must be a number/
+        );
+      });
+      it("should throw an error if Grid's position Y coordinate is not a number", () => {
+        const errorValue = () => {
+          const x = 1;
+          const y = 3;
+          const direction = "N";
+          const grid = { x: 1, y: "N" };
+
+          return Rover.create(x, y, direction, grid);
+        };
+
+        assert.throws(
+          errorValue,
+          /Grid X and Y coordinate values must be a number/
+        );
+      });
+    });
   });
 });

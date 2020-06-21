@@ -28,10 +28,15 @@ class Position {
     return `${this.x} ${this.y}`;
   }
 }
+// const x = 1;
+// const y = 3;
 
-const grid = {
-  x: 5,
-  y: 5
-};
+// const grid = {
+//   x: 5,
+//   y: -5
+// };
+
+// rover1 = Position.create(x, y, grid);
+// console.log(rover1);
 
 module.exports = Position;

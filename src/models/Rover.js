@@ -8,9 +8,18 @@ class Rover {
   }
 
   static create(x, y, dir, gridCoord) {
-    const position = Position.create(x, y, gridCoord);
-    const direction = Direction.create(dir);
-    return new Rover(position, direction);
+    if (typeof x !== "number" || typeof y !== "number") {
+      throw new Error("Position X and Y coordinate values must be a number");
+    } else if (
+      typeof gridCoord.x !== "number" ||
+      typeof gridCoord.y !== "number"
+    ) {
+      throw new Error("Grid X and Y coordinate values must be a number");
+    } else {
+      const position = Position.create(x, y, gridCoord);
+      const direction = Direction.create(dir);
+      return new Rover(position, direction);
+    }
   }
 
   turnLeft() {
@@ -61,17 +70,19 @@ class Rover {
   }
 }
 
-// const instructions3 = "MMRMMRMRRMMMMMMMM";
-// const roverGrid = {
-//   x: 5,
-//   y: 5
-// };
-
 module.exports = Rover;
-// const rover3 = Rover.create(3, 3, "E", roverGrid);
-// console.log("rover3 display: ", rover3.displayOutput());
-// rover3.processInstructions(instructions3);
-// console.log("rover3 display final: ", rover3.displayOutput());
+
+const roverGrid = {
+  x: 5,
+  y: 5
+};
+
+const instructions3 = "MMMMMMMMMM";
+const rover3 = Rover.create(3, 3, "N", roverGrid);
+console.log(rover3);
+console.log("rover3 display: ", rover3.displayOutput());
+rover3.processInstructions(instructions3);
+console.log("rover3 display final: ", rover3.displayOutput());
 // console.log(rover3.position.x);
 // console.log(rover3.position.y);
 // console.log(rover3.position.grid.x);
