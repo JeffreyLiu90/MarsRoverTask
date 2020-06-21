@@ -11,11 +11,14 @@ describe("Direction", () => {
 
       assert.equal(direction.value, value);
     });
-    xit("should throw an error if wrong directional value is given", () => {
-      const value = "F";
-      const direction = new Direction(value);
+    it("should throw an error if wrong directional value is given", () => {
+      const direction = "S";
 
-      assert.throws(direction, "This is not a valid direction");
+      const newDirection = direction => {
+        return new Direction(direction);
+      };
+
+      assert.throws(newDirection(direction), "This is not a valid direction");
     });
   });
   describe("#turn right", () => {

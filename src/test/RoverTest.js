@@ -47,5 +47,56 @@ describe("Rover", () => {
         assert.equal(rover.direction.value, expectedValues[index]);
       });
     });
+    it("should move forward correctly on the X axis based on the direction when given the instruction M", () => {
+      const x = 1;
+      const y = 2;
+
+      const instructions = "M";
+      const grid = { x: 5, y: 5 };
+
+      roverE = Rover.create(x, y, "E", grid);
+      roverW = Rover.create(x, y, "W", grid);
+
+      const rovers = [roverE, roverW];
+      const expectedValues = [2, 0];
+
+      rovers.forEach(rover => rover.processInstructions(instructions));
+
+      rovers.forEach((rover, index) => {
+        assert.equal(rover.position.x, expectedValues[index]);
+      });
+    });
+    it("should move forward correctly on the Y axis based on the direction when given the instruction M", () => {
+      const x = 1;
+      const y = 2;
+
+      const instructions = "M";
+      const grid = { x: 5, y: 5 };
+
+      roverE = Rover.create(x, y, "N", grid);
+      roverW = Rover.create(x, y, "S", grid);
+
+      const rovers = [roverE, roverW];
+      const expectedValues = [3, 1];
+
+      rovers.forEach(rover => rover.processInstructions(instructions));
+
+      rovers.forEach((rover, index) => {
+        assert.equal(rover.position.y, expectedValues[index]);
+      });
+    });
+    describe("#display", () => {
+      it("should display the Rover's current position", () => {
+        const x = 1;
+        const y = 2;
+        const direction = "N";
+        const grid = { x: 5, y: 5 };
+
+        const rover1 = Rover.create(x, y, direction, grid);
+        const value = `${1} ${2} ${"N"}`;
+
+        assert.equal(rover1.displayOutput(), value);
+      });
+    });
   });
 });

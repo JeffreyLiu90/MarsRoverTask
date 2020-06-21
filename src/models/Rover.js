@@ -34,7 +34,7 @@ class Rover {
   }
 
   displayOutput() {
-    return `${this.position.displayPosition()} ${this.direction.displayDirection()} `;
+    return `${this.position.displayPosition()} ${this.direction.displayDirection()}`;
   }
 
   processInstruction(instruction) {
