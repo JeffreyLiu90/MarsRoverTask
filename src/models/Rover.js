@@ -24,14 +24,6 @@ class Rover {
     this.direction.turnRight();
   }
 
-  // checkLarger(a, b) {
-  //   if (a < b) {
-  //  a+= 1
-  //   } else {
-  //     throw new Error("NO!");
-  //   }
-  // }
-
   moveEast() {
     if (this.position.x < this.grid.x) {
       this.position.x += 1;
