@@ -1,19 +1,19 @@
 const Position = require("../models/Position");
 const Direction = require("../models/Direction");
-const Grid = require("../models/Grid");
+const Boundary = require("../models/Boundary");
 
 class Rover {
-  constructor(grid, position, direction) {
-    this.grid = grid;
+  constructor(boundary, position, direction) {
+    this.boundary = boundary;
     this.position = position;
     this.direction = direction;
   }
 
-  static create(x, y, dir, gridCoord) {
-    const grid = Grid.create(gridCoord);
-    const position = Position.create(x, y, gridCoord);
+  static create(x, y, dir, boundary) {
+    const roverBoundary = Boundary.create(boundary);
+    const position = Position.create(x, y, boundary);
     const direction = Direction.create(dir);
-    return new Rover(grid, position, direction);
+    return new Rover(roverBoundary, position, direction);
   }
 
   turnLeft() {
@@ -25,25 +25,25 @@ class Rover {
   }
 
   moveEast() {
-    if (this.position.x < this.grid.x) {
+    if (this.position.x < this.boundary.x) {
       this.position.x += 1;
     } else {
-      throw new Error("The rover cannot go off the grid size's max X value");
+      throw new Error("The rover cannot go off its max X Boundary value");
     }
   }
   moveWest() {
     if (this.position.x > 0) {
       this.position.x -= 1;
     } else {
-      throw new Error("The rover cannot go off the grid size's min X value");
+      throw new Error("The rover cannot go off its min X Boundary value of 0");
     }
   }
 
   moveNorth() {
-    if (this.position.y < this.grid.y) {
+    if (this.position.y < this.boundary.y) {
       this.position.y += 1;
     } else {
-      throw new Error("The rover cannot go off the grid's max Y value");
+      throw new Error("The rover cannot go off its max Y Boundary value");
     }
   }
 
@@ -51,9 +51,7 @@ class Rover {
     if (this.position.y > 0) {
       this.position.y -= 1;
     } else {
-      throw new Error(
-        "The rover cannot go off the grid size's minimum Y value"
-      );
+      throw new Error("The rover cannot go off its min Y Boundary value of 0");
     }
   }
 

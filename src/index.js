@@ -1,7 +1,7 @@
 const Rover = require("../src/models/Rover");
 
 const instructions = "LMLMLMLMM";
-const instructions2 = "MMMM";
+const instructions2 = "MMM";
 
 const roverGrid = {
   x: 5,

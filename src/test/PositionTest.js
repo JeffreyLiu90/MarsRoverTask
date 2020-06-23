@@ -65,7 +65,7 @@ describe("Position", () => {
 
       assert.throws(
         errorSize,
-        /X and Y value of the rover position cannot be larger than the grid size/
+        /X and Y value of the rover position cannot be larger than the boundary size/
       );
     });
     it("throw an error if the position's Y coordinate is larger than Grid's Y coordinate", () => {
@@ -81,7 +81,7 @@ describe("Position", () => {
 
       assert.throws(
         errorSize,
-        /X and Y value of the rover position cannot be larger than the grid size/
+        /X and Y value of the rover position cannot be larger than the boundary size/
       );
     });
     it("throw an error if the X coordinate value provided is not a number", () => {
