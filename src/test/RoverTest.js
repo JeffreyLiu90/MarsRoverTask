@@ -99,64 +99,64 @@ describe("Rover", () => {
       });
     });
     describe("#error", () => {
-      it("should throw an error if Position X coordinate is not a number", () => {
-        const errorValue = () => {
-          const x = "N";
+      it("should throw an error if the Rover tries to move off the Grid size's maximum X value", () => {
+        const errorMovement = () => {
+          const x = 1;
+          const y = 2;
+          const direction = "E";
+          const grid = { x: 5, y: 5 };
+          const instructions = "MMMMMM";
+          const rover1 = Rover.create(x, y, direction, grid);
+          return rover1.processInstructions(instructions);
+        };
+        assert.throws(
+          errorMovement,
+          /The rover cannot go off the grid size's max X value/
+        );
+      });
+      it("should throw an error if the Rover tries to move off the Grid size's maximum Y value", () => {
+        const errorMovement = () => {
+          const x = 1;
           const y = 2;
           const direction = "N";
           const grid = { x: 5, y: 5 };
-
-          return Rover.create(x, y, direction, grid);
+          const instructions = "MMMMM";
+          const rover1 = Rover.create(x, y, direction, grid);
+          return rover1.processInstructions(instructions);
         };
-
         assert.throws(
-          errorValue,
-          /Position X and Y coordinate values must be a number/
+          errorMovement,
+          /The rover cannot go off the grid's max Y value/
         );
       });
-      it("should throw an error if Position Y coordinate is not a number", () => {
-        const errorValue = () => {
+      it("should throw an error if the Rover tries to move off the Grid size's min Y value", () => {
+        const errorMovement = () => {
           const x = 1;
-          const y = "N";
-          const direction = "N";
+          const y = 2;
+          const direction = "S";
           const grid = { x: 5, y: 5 };
-
-          return Rover.create(x, y, direction, grid);
+          const instructions = "MMMMM";
+          const rover1 = Rover.create(x, y, direction, grid);
+          return rover1.processInstructions(instructions);
         };
-
         assert.throws(
-          errorValue,
-          /Position X and Y coordinate values must be a number/
+          errorMovement,
+          /The rover cannot go off the grid size's minimum Y value/
         );
       });
-      it("should throw an error if Grid's position X coordinate is not a number", () => {
-        const errorValue = () => {
+      it("should throw an error if the Rover tries to move off the Grid size's min X value", () => {
+        const errorMovement = () => {
           const x = 1;
-          const y = 3;
-          const direction = "N";
-          const grid = { x: "N", y: 5 };
-
-          return Rover.create(x, y, direction, grid);
+          const y = 2;
+          const direction = "W";
+          const grid = { x: 5, y: 5 };
+          const instructions = "MMMMM";
+          const rover1 = Rover.create(x, y, direction, grid);
+          return rover1.processInstructions(instructions);
         };
-
         assert.throws(
-          errorValue,
-          /Grid X and Y coordinate values must be a number/
-        );
-      });
-      it("should throw an error if Grid's position Y coordinate is not a number", () => {
-        const errorValue = () => {
-          const x = 1;
-          const y = 3;
-          const direction = "N";
-          const grid = { x: 1, y: "N" };
-
-          return Rover.create(x, y, direction, grid);
-        };
-
-        assert.throws(
-          errorValue,
-          /Grid X and Y coordinate values must be a number/
+          errorMovement,
+          /The rover cannot go off the grid size's min X value/
         );
       });
     });

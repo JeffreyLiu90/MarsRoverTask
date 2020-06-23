@@ -1,25 +1,19 @@
 const Position = require("../models/Position");
 const Direction = require("../models/Direction");
+const Grid = require("../models/Grid");
 
 class Rover {
-  constructor(position, direction) {
+  constructor(grid, position, direction) {
+    this.grid = grid;
     this.position = position;
     this.direction = direction;
   }
 
   static create(x, y, dir, gridCoord) {
-    if (typeof x !== "number" || typeof y !== "number") {
-      throw new Error("Position X and Y coordinate values must be a number");
-    } else if (
-      typeof gridCoord.x !== "number" ||
-      typeof gridCoord.y !== "number"
-    ) {
-      throw new Error("Grid X and Y coordinate values must be a number");
-    } else {
-      const position = Position.create(x, y, gridCoord);
-      const direction = Direction.create(dir);
-      return new Rover(position, direction);
-    }
+    const grid = Grid.create(gridCoord);
+    const position = Position.create(x, y, gridCoord);
+    const direction = Direction.create(dir);
+    return new Rover(grid, position, direction);
   }
 
   turnLeft() {
@@ -30,15 +24,62 @@ class Rover {
     this.direction.turnRight();
   }
 
+  // checkLarger(a, b) {
+  //   if (a < b) {
+  //  a+= 1
+  //   } else {
+  //     throw new Error("NO!");
+  //   }
+  // }
+
+  moveEast() {
+    if (this.position.x < this.grid.x) {
+      this.position.x += 1;
+    } else {
+      throw new Error("The rover cannot go off the grid size's max X value");
+    }
+  }
+  moveWest() {
+    if (this.position.x > 0) {
+      this.position.x -= 1;
+    } else {
+      throw new Error("The rover cannot go off the grid size's min X value");
+    }
+  }
+
+  moveNorth() {
+    if (this.position.y < this.grid.y) {
+      this.position.y += 1;
+    } else {
+      throw new Error("The rover cannot go off the grid's max Y value");
+    }
+  }
+
+  moveSouth() {
+    if (this.position.y > 0) {
+      this.position.y -= 1;
+    } else {
+      throw new Error(
+        "The rover cannot go off the grid size's minimum Y value"
+      );
+    }
+  }
+
   moveForward() {
     if (this.direction.value === "N") {
-      this.position.y += 1;
-    } else if (this.direction.value === "W") {
-      this.position.x -= 1;
-    } else if (this.direction.value === "S") {
-      this.position.y -= 1;
-    } else if (this.direction.value === "E") {
-      this.position.x += 1;
+      this.moveNorth();
+    }
+
+    if (this.direction.value === "W") {
+      this.moveWest();
+    }
+
+    if (this.direction.value === "S") {
+      this.moveSouth();
+    }
+
+    if (this.direction.value === "E") {
+      this.moveEast();
     }
   }
 
@@ -52,14 +93,7 @@ class Rover {
     } else if (instruction === "R") {
       this.turnRight();
     } else if (instruction === "M") {
-      if (
-        this.position.x < this.position.grid.x ||
-        this.position.y < this.position.grid.y
-      ) {
-        this.moveForward();
-      } else {
-        throw new Error("The Rover cannot go off the Grid Size");
-      }
+      this.moveForward();
     }
   }
 
@@ -71,35 +105,3 @@ class Rover {
 }
 
 module.exports = Rover;
-
-const roverGrid = {
-  x: 5,
-  y: 5
-};
-
-const instructions3 = "MMMMMMMMMM";
-const rover3 = Rover.create(3, 3, "N", roverGrid);
-console.log(rover3);
-console.log("rover3 display: ", rover3.displayOutput());
-rover3.processInstructions(instructions3);
-console.log("rover3 display final: ", rover3.displayOutput());
-// console.log(rover3.position.x);
-// console.log(rover3.position.y);
-// console.log(rover3.position.grid.x);
-// console.log(rover3.position.grid.y);
-
-// const grid1 = new Grid(5, 5);
-// const gridCoord = { x: 5, y: 5 };
-// const rover1 = Rover.create(1, 2, "N", gridCoord);
-// console.log("rover1 :", rover1);
-// console.log("Position X :", rover1.position.x);
-// console.log("Position Y :", rover1.position.y);
-// console.log("Position of Grid X :", rover1.position.grid.x);
-// console.log("Position of Grid Y :", rover1.position.grid.y);
-// console.log("Direction :", rover1.direction.value);
-
-// console.log("Display position initial: ", rover1.displayOutput());
-// rover1.processInstructions("LMLMLMLMM");
-// console.log("rover1FINALisplay: ", rover1.displayOutput());
-// // console.log("rover1: ", rover1);
-// console.log("rover1: ", rover1);

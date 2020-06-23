@@ -19,7 +19,7 @@ describe("Position", () => {
       assert.equal(position1.displayPosition(), value);
     });
   });
-  describe("#position size error", () => {
+  describe("#errors", () => {
     it("throw an error if the position's X coordinate is smaller than 0", () => {
       const errorSize = () => {
         const x = -1;
@@ -31,7 +31,10 @@ describe("Position", () => {
         return Position.create(x, y, grid);
       };
 
-      assert.throws(errorSize, /Rover positions cannot be less than 0/);
+      assert.throws(
+        errorSize,
+        /X and Y value of the rover cannot be less than 0/
+      );
     });
     it("throw an error if the position's Y coordinate is smaller than 0", () => {
       const errorSize = () => {
@@ -44,7 +47,10 @@ describe("Position", () => {
         return Position.create(x, y, grid);
       };
 
-      assert.throws(errorSize, /Rover positions cannot be less than 0/);
+      assert.throws(
+        errorSize,
+        /X and Y value of the rover cannot be less than 0/
+      );
     });
     it("throw an error if the position's X coordinate is larger than Grid's X coordinate", () => {
       const errorSize = () => {
@@ -59,7 +65,7 @@ describe("Position", () => {
 
       assert.throws(
         errorSize,
-        /X and Y value of the rover position cannot be larger than the grid coordinates/
+        /X and Y value of the rover position cannot be larger than the grid size/
       );
     });
     it("throw an error if the position's Y coordinate is larger than Grid's Y coordinate", () => {
@@ -75,34 +81,40 @@ describe("Position", () => {
 
       assert.throws(
         errorSize,
-        /X and Y value of the rover position cannot be larger than the grid coordinates/
+        /X and Y value of the rover position cannot be larger than the grid size/
       );
     });
-    it("throw an error if the grid's position X is smaller than 0", () => {
+    it("throw an error if the X coordinate value provided is not a number", () => {
       const errorSize = () => {
-        const x = 3;
-        const y = 6;
+        const x = "N";
+        const y = 3;
         const grid = {
-          x: -5,
+          x: 5,
           y: 5
         };
         return Position.create(x, y, grid);
       };
 
-      assert.throws(errorSize, /Grid coordinates cannot be less than 0/);
+      assert.throws(
+        errorSize,
+        /Position X and Y coordinate values must be a number/
+      );
     });
-    it("throw an error if the grid's position Y is smaller than 0", () => {
+    it("throw an error if the Y coordinate value provided is not a number", () => {
       const errorSize = () => {
         const x = 3;
-        const y = 6;
+        const y = "N";
         const grid = {
           x: 5,
-          y: -5
+          y: 5
         };
         return Position.create(x, y, grid);
       };
 
-      assert.throws(errorSize, /Grid coordinates cannot be less than 0/);
+      assert.throws(
+        errorSize,
+        /Position X and Y coordinate values must be a number/
+      );
     });
   });
 });
