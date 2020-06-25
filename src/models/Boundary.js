@@ -1,4 +1,4 @@
-class Plateau {
+class Boundary {
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -10,7 +10,7 @@ class Plateau {
     } else if (boundary.x < 0 || boundary.y < 0) {
       throw new Error("boundary values cannot be less than 0");
     } else {
-      return new Plateau(boundary.x, boundary.y);
+      return new Boundary(boundary.x, boundary.y);
     }
   }
 
@@ -19,4 +19,4 @@ class Plateau {
   }
 }
 
-module.exports = Plateau;
+module.exports = Boundary;

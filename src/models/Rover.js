@@ -1,6 +1,6 @@
 const Position = require("../models/Position");
 const Direction = require("../models/Direction");
-const Plateau = require("../models/Plateau");
+const Boundary = require("../models/Boundary");
 
 class Rover {
   constructor(boundary, position, direction) {
@@ -10,7 +10,7 @@ class Rover {
   }
 
   static create(x, y, dir, boundary) {
-    const roverBoundary = Plateau.create(boundary);
+    const roverBoundary = Boundary.create(boundary);
     const position = Position.create(x, y, boundary);
     const direction = Direction.create(dir);
     return new Rover(roverBoundary, position, direction);
